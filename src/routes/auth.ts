@@ -2,8 +2,9 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import { ResultSetHeader } from "mysql2";
 import { pool } from "../database.js";
-import { validateRegistration } from "../middleware/auth-validation.js";
+import { validateRegistration, validateLogin } from "../middleware/auth-validation.js";
 import { User, UserResponse } from "../interfaces.js";
+import { generateToken } from "../utils/jwt.js";
 
 const router = Router();
 
@@ -44,6 +45,53 @@ router.post("/register", validateRegistration, async (req, res) => {
     console.error("Registration error:", error);
     res.status(500).json({
       error: "Failed to register user",
+    });
+  }
+});
+
+router.post("/login", validateLogin, async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const [rows] = await pool.execute(
+      "SELECT id, email, password_hash, created_at FROM users WHERE email = ?",
+      [email]
+    );
+    const users = rows as User[];
+
+    if (users.length === 0) {
+      return res.status(401).json({
+        error: "Invalid email or password",
+      });
+    }
+
+    const user = users[0];
+
+    const validPassword = await bcrypt.compare(password, user.password_hash!);
+
+    if (!validPassword) {
+      return res.status(401).json({
+        error: "Invalid email or password",
+      });
+    }
+
+    const token = generateToken(user.id);
+
+    const userResponse: UserResponse = {
+      id: user.id,
+      email: user.email,
+      created_at: user.created_at,
+    };
+
+    res.json({
+      message: "Login successful",
+      user: userResponse,
+      token,
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({
+      error: "Failed to log in",
     });
   }
 });
