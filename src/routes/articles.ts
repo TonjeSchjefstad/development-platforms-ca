@@ -3,6 +3,7 @@ import { pool } from "../database.js";
 import { Article } from "../interfaces.js"; 
 import { ResultSetHeader } from "mysql2";
 import { validateArticle } from "../middleware/article-validation.js";
+import { authenticateToken } from "../middleware/auth-validation.js";
 
 const router = Router();
 
@@ -30,11 +31,11 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", validateArticle, async (req, res) => {
+router.post("/", authenticateToken, validateArticle, async (req, res) => {
   try {
     const { title, body, category } = req.body;
 
-    const submitted_by = 1;
+    const submitted_by = req.user!.id;
 
     const [result]: [ResultSetHeader, any] = await pool.execute(
       "INSERT INTO articles (title, body, category, submitted_by) VALUES (?, ?, ?, ?)",
