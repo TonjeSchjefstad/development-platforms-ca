@@ -119,7 +119,15 @@ I have used AI for two purposes in this project:
 - Create test articles
 
 ## Motivation
-Content will be added later
+I chose to do option 1 Express.js API because I wanted to get a better understanding about backend development and how APIs work. I have been thinking about studying backend after finishing my frontend studies, so i really enjoyed getting more insight into the server-side. After completing the modules I can see that Supabase would be a fast solution if I'm building a project quickly, due to having features like auto-generated APIs, authencication system, row level security and  real-time subscriptions. For learning purposes I wanted to build everything from scratch to better understand the concepts and have full controll over the API.
+
+Doing this CA helped me gain experience in creating a custom API, and I've been following the steps in the modules to ensure that the CA requirements are met. I enjoyed getting familiar with MySQL Workbench and to learn how databases work on a fundamental level. Understanding how foreign keys connect tables and why CASCADE DELETE is important for data integrity was really interesting. I also enjoyed getting more experience with Postman for API testing.
+
+From this course I have learned how databases store and relate data through foreign keys, how middleware functions protect routes and validate input, and how interfaces ensure type safety. Implementing security features like JWT authentication and bcrypt password hashing was valuable, and I have a better understanding how to protect user data. 
+
+During this project I did bumb into minor hickups along the way, but I prioritized testing my endpoints thoroughly, and managed to fix issues right away. Before starting on the assignment, I went through all modules and wrote down all steps, and planned the project structure, so it would be easier to know where each code should go, and when to implement the different parts. I struggled with finding out the correct way to import a database when setting up a project locally. The modules didn't cover that part, so I had to research the solution. All in all I really enjoyed this project. 
+
+
 
 ## Contact
 ### Tonje Schjefstad
