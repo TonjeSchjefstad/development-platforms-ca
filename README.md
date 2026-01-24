@@ -31,6 +31,11 @@ Open MySQL Workbench and import database using:
 - Select `database.sql` file from the project
 - Under "Default Target Schema", click "New..." and enter `news` as the database name
 - Start Import
+- 7. Verify the import by running:
+```sql
+   USE news;
+   SHOW TABLES;
+```
 Right-click in the Schemas panel and select "Refresh All" to verify the import.
 
 4. Create a `.env` file in the root directory:
