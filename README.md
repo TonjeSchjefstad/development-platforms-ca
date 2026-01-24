@@ -25,7 +25,15 @@ git clone https://github.com/TonjeSchjefstad/development-platforms-ca.git
 npm install
 ```
 
-3. Create a `.env` file in the root directory:
+3. Setup database:
+Open MySQL Workbench and import database using:
+- Server → Data Import → Import from Self-Contained File
+- Select `database.sql` file from the project
+- Under "Default Target Schema", click "New..." and enter `news` as the database name
+- Start Import
+Right-click in the Schemas panel and select "Refresh All" to verify the import.
+
+4. Create a `.env` file in the root directory:
 ```
 DB_HOST=localhost
 DB_USER=root
@@ -34,9 +42,6 @@ DB_NAME=news
 PORT=3000
 JWT_SECRET=your-secret-key
 ```
-
-### Database Setup
-Instructions will be added.
 
 ### Running
 
